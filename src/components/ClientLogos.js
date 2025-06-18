@@ -10,8 +10,16 @@ const LogosSection = styled.section`
   padding: 4rem 2rem;
   overflow: hidden;
 
+  @media (max-width: 1024px) {
+    padding: 3.5rem 1.5rem;
+  }
+
   @media (max-width: 768px) {
     padding: 3rem 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 2.5rem 0.75rem;
   }
 `;
 
@@ -19,6 +27,11 @@ const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
+
+  @media (max-width: 480px) {
+    width: 100%;
+    overflow-x: hidden;
+  }
 `;
 
 const SectionTitle = styled(motion.h2)`
@@ -27,8 +40,16 @@ const SectionTitle = styled(motion.h2)`
   color: #1e3a8a;
   margin-bottom: 1rem;
 
+  @media (max-width: 1024px) {
+    font-size: 2.2rem;
+  }
+
   @media (max-width: 768px) {
     font-size: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.8rem;
   }
 `;
 
@@ -39,12 +60,31 @@ const SectionSubtitle = styled(motion.p)`
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+    max-width: 90%;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
 `;
 
 const LogosContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3rem;
+
+  @media (max-width: 768px) {
+    gap: 2.5rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 2rem;
+  }
 `;
 
 const LogoRow = styled(motion.div)`
@@ -54,8 +94,16 @@ const LogoRow = styled(motion.div)`
   gap: 2rem;
   flex-wrap: wrap;
 
+  @media (max-width: 1024px) {
+    gap: 1.75rem;
+  }
+
   @media (max-width: 768px) {
     gap: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 1rem;
   }
 `;
 
@@ -92,6 +140,12 @@ const LogoCard = styled(motion.div)`
     }
   }
 
+  @media (max-width: 1024px) {
+    min-width: 160px;
+    min-height: 90px;
+    padding: 1.75rem;
+  }
+
   @media (max-width: 768px) {
     min-width: 150px;
     min-height: 80px;
@@ -102,6 +156,18 @@ const LogoCard = styled(motion.div)`
       max-height: 50px;
     }
   }
+
+  @media (max-width: 480px) {
+    min-width: 130px;
+    min-height: 70px;
+    padding: 1.25rem;
+    border-radius: 8px;
+
+    img {
+      max-width: 90px;
+      max-height: 40px;
+    }
+  }
 `;
 
 const LogoText = styled.div`
@@ -110,8 +176,16 @@ const LogoText = styled.div`
   color: #374151;
   letter-spacing: -0.5px;
 
+  @media (max-width: 1024px) {
+    font-size: 1.3rem;
+  }
+
   @media (max-width: 768px) {
     font-size: 1.2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
   }
 `;
 
@@ -121,6 +195,16 @@ const CategoryTitle = styled(motion.h3)`
   color: #1e3a8a;
   margin-bottom: 2rem;
   text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.1rem;
+    margin-bottom: 1.25rem;
+  }
 `;
 
 const StatsContainer = styled(motion.div)`
@@ -133,6 +217,28 @@ const StatsContainer = styled(motion.div)`
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;
   text-align: center;
+
+  @media (max-width: 1024px) {
+    padding: 2.5rem 1.75rem;
+    margin-top: 3.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem 1.5rem;
+    margin-top: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1.5rem;
+    border-radius: 16px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem 1rem;
+    margin-top: 2.5rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    border-radius: 12px;
+  }
 `;
 
 const StatItem = styled(motion.div)`
@@ -145,8 +251,16 @@ const StatNumber = styled.div`
   color: #f59e0b;
   margin-bottom: 0.5rem;
 
+  @media (max-width: 1024px) {
+    font-size: 2.8rem;
+  }
+
   @media (max-width: 768px) {
     font-size: 2.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 2rem;
   }
 `;
 
@@ -155,6 +269,16 @@ const StatLabel = styled.div`
   color: rgba(255, 255, 255, 0.9);
   text-transform: uppercase;
   letter-spacing: 1px;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.85rem;
+    letter-spacing: 0.3px;
+  }
 `;
 
 const ClientLogos = () => {

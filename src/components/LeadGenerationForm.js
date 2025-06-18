@@ -9,23 +9,40 @@ const FormSection = styled.section`
   display: flex;
   min-height: 100vh;
   background: white;
+  position: relative;
+  overflow: hidden;
 
   @media (max-width: 1024px) {
     flex-direction: column;
+  }
+
+  @media (max-width: 768px) {
+    min-height: auto; /* Allow natural height on mobile */
   }
 `;
 
 const LeftContent = styled.div`
   flex: 1;
   padding: 3rem;
-  background: white;
-  color: #374151;
+
+  color: #1e3a8a;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+  z-index: 2;
+  background: white;
+
+  @media (max-width: 1024px) {
+    padding: 2.5rem 2rem;
+  }
 
   @media (max-width: 768px) {
     padding: 2rem 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem 1rem;
   }
 `;
 
@@ -37,21 +54,18 @@ const RightForm = styled.div`
   flex-direction: column;
   justify-content: center;
   position: relative;
-  overflow: hidden;
+  z-index: 2;
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-    opacity: 0.3;
+  @media (max-width: 1024px) {
+    padding: 2.5rem 2rem;
   }
 
   @media (max-width: 768px) {
     padding: 2rem 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem 1rem;
   }
 `;
 
@@ -62,16 +76,37 @@ const MainHeadline = styled(motion.h1)`
   margin-bottom: 2rem;
   line-height: 1.2;
 
+  @media (max-width: 1024px) {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+  }
+
   @media (max-width: 768px) {
     font-size: 2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
   }
 `;
 
 const SubHeadline = styled(motion.p)`
   font-size: 1.2rem;
-  color: #374151;
+  color: #4b5563;
   margin-bottom: 2rem;
   line-height: 1.6;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+  }
 `;
 
 const BenefitsList = styled(motion.div)`
@@ -83,6 +118,16 @@ const BenefitTitle = styled.h2`
   font-weight: 600;
   color: #1e3a8a;
   margin-bottom: 1.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const BenefitItem = styled(motion.div)`
@@ -115,8 +160,16 @@ const FormContainer = styled(motion.div)`
   width: 100%;
   max-width: 500px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  position: relative;
-  z-index: 2;
+
+  @media (max-width: 768px) {
+    padding: 2rem;
+    max-width: 100%;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem;
+    border-radius: 10px;
+  }
 `;
 
 const FormTitle = styled.h2`
@@ -125,6 +178,16 @@ const FormTitle = styled.h2`
   color: #1e3a8a;
   margin-bottom: 1.5rem;
   text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 1.6rem;
+    margin-bottom: 1.2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const FormField = styled(motion.div)`
@@ -167,6 +230,11 @@ const Input = styled.input`
       box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
     }
   `}
+
+  @media (max-width: 480px) {
+    font-size: 16px; /* Prevent zoom on iOS devices */
+    padding: 0.75rem;
+  }
 `;
 
 const Select = styled.select`
@@ -194,6 +262,11 @@ const Select = styled.select`
       box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
     }
   `}
+
+  @media (max-width: 480px) {
+    font-size: 16px; /* Prevent zoom on iOS devices */
+    padding: 0.75rem;
+  }
 `;
 
 const ErrorText = styled.span`
@@ -253,6 +326,11 @@ const SubmitButton = styled(motion.button)`
   &:disabled {
     opacity: 0.7;
     cursor: not-allowed;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
   }
 `;
 
