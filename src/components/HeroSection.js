@@ -419,6 +419,10 @@ const ProgressIndicator = styled(motion.div)`
   border-radius: 2px;
 `;
 
+const ArrowIcon = styled(motion.span)`
+  font-size: 1.2rem;
+`;
+
 const LayoutToggleContainer = styled.div`
   margin-bottom: 1rem;
   display: flex;
@@ -682,7 +686,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Transform Your Business Today
+            Transform Your Ideas into Scalable Digital Solutions
           </FormTitle>
 
           <FormSubtitle
@@ -690,10 +694,11 @@ const HeroSection = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Get expert insights from Sachhsoft&apos;s 10+ years of experience.
-            Download our exclusive guides and accelerate your growth.
+            We help startups and businesses build lightning-fast, secure, and
+            scalable web & mobile apps using cutting-edge technologies.
           </FormSubtitle>
 
+          {/* 
           <motion.div
             style={{
               padding: "2rem",
@@ -704,7 +709,9 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <form style={{ textAlign: "left" }}>
+          */}
+          {/* Commenting out the form container but keeping just the button */}
+          {/* <form style={{ textAlign: "left" }}>
               <div style={{ marginBottom: "1.5rem" }}>
                 <label
                   style={{
@@ -728,35 +735,38 @@ const HeroSection = () => {
                   }}
                   required
                 />
-              </div>
+              </div> */}
 
-              <motion.button
-                type="submit"
-                style={{
-                  width: "100%",
-                  padding: "1rem",
-                  background: "linear-gradient(135deg, #f59e0b, #f97316)",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "6px",
-                  fontWeight: "600",
-                  fontSize: "1.1rem",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "0.5rem",
-                }}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Get Free Access
-                <span style={{ fontSize: "1.2rem", marginLeft: "0.5rem" }}>
-                  →
-                </span>
-              </motion.button>
+          <motion.button
+            type="submit"
+            style={{
+              width: "100%",
+              padding: "1rem",
+              background: "linear-gradient(135deg, #f59e0b, #f97316)",
+              color: "white",
+              border: "none",
+              borderRadius: "6px",
+              fontWeight: "600",
+              fontSize: "1.1rem",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "0.5rem",
+            }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            🚀 Get a Free Consultation
+            <ArrowIcon
+              animate={{ x: [0, 5, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              →
+            </ArrowIcon>
+          </motion.button>
 
-              <p
+          {/* <p
                 style={{
                   fontSize: "0.875rem",
                   color: "#6b7280",
@@ -767,8 +777,8 @@ const HeroSection = () => {
                 Instant access to all our strategic guides. No credit card
                 required.
               </p>
-            </form>
-          </motion.div>
+            </form> */}
+          {/* </motion.div> */}
         </FormContainer>
       </RightSection>
     </HeroContainer>
