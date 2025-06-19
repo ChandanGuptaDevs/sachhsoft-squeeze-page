@@ -11,8 +11,16 @@ const HeaderContainer = styled.header`
   top: 0;
   z-index: 100;
 
+  @media (max-width: 1024px) {
+    padding: 1.1rem 1.8rem;
+  }
+
   @media (max-width: 768px) {
-    padding: 1rem;
+    padding: 1rem 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.8rem 1rem;
   }
 `;
 
@@ -27,28 +35,24 @@ const NavContainer = styled.nav`
 const LogoContainer = styled.div`
   display: flex;
   align-items: center;
-  height: 50px;
-  padding: 0.5rem 1rem;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  height: 45px; /* Slightly reduced for better proportions */
   transition: all 0.3s ease;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
   }
 
-  img {
-    height: 100%;
-    width: auto;
-    object-fit: contain;
-    filter: brightness(0.7) contrast(1.3) saturate(1.2);
+  @media (max-width: 1024px) {
+    height: 42px;
   }
 
   @media (max-width: 768px) {
-    height: 40px;
-    padding: 0.4rem 0.8rem;
+    height: 38px;
+  }
+
+  @media (max-width: 480px) {
+    height: 32px;
   }
 `;
 
@@ -58,10 +62,10 @@ const Header = () => {
       <NavContainer>
         <LogoContainer>
           <Image
-            src="/images/sachhsoft-logo-new.webp"
+            src="/images/sachhsoft_logo_white.png"
             alt="Sachhsoft"
-            width={150}
-            height={30}
+            width={160}
+            height={32}
             priority
             style={{
               height: "100%",

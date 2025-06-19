@@ -39,6 +39,10 @@ const LeftSection = styled.div`
   padding: 2rem;
   position: relative;
   z-index: 2;
+
+  @media (max-width: 480px) {
+    padding: 1.5rem 1rem;
+  }
 `;
 
 const RightSection = styled.div`
@@ -52,7 +56,11 @@ const RightSection = styled.div`
   z-index: 2;
 
   @media (max-width: 768px) {
-    padding: 1rem;
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.25rem 1rem;
   }
 `;
 
@@ -72,30 +80,111 @@ const CarouselContainer = styled.div`
     height: 420px;
   }
 
+  @media (max-width: 480px) {
+    width: 300px;
+    height: 400px;
+  }
+
   @media (max-width: 375px) {
-    width: 290px;
+    width: 280px;
     height: 380px;
   }
 `;
 
-const ValueProposition = styled(motion.div)`
-  background: linear-gradient(135deg, #f59e0b, #f97316);
-  color: white;
-  padding: 0.8rem 1.5rem;
-  border-radius: 25px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
-  text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-`;
-
+// SOLUTION 1: Split Layout - Image on top, text below with solid background
 const EbookCard = styled(motion.div)`
   position: absolute;
   width: 100%;
   height: 100%;
-  background: linear-gradient(145deg, #ffffff, #f8fafc);
+  border-radius: 20px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  overflow: hidden;
+  background: white;
+`;
+
+const ImageSection = styled.div`
+  flex: 0 0 60%; /* Takes up 60% of the card height */
+  background-image: ${(props) => `url(${props.bgImage})`};
+  background-size: cover;
+  background-position: center;
+  position: relative;
+
+  /* Optional: Add a subtle overlay to the image section */
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
+  }
+`;
+
+const TextSection = styled.div`
+  flex: 1;
+  padding: 1.5rem;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+
+  @media (max-width: 480px) {
+    padding: 1.25rem 1rem;
+  }
+`;
+
+const EbookTitle = styled.h2`
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1e3a8a;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  @media (max-width: 375px) {
+    font-size: 1.1rem;
+  }
+`;
+
+const EbookSubtitle = styled.p`
+  color: #6b7280;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+  }
+`;
+
+// Alternative Solution 2: Keep overlay but make it stronger
+const EbookCardOverlay = styled(motion.div)`
+  position: absolute;
+  width: 100%;
+  height: 100%;
   border-radius: 20px;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
   display: flex;
@@ -106,18 +195,59 @@ const EbookCard = styled(motion.div)`
   padding: 2.5rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
   cursor: pointer;
-  backdrop-filter: blur(10px);
+  background-image: ${(props) => `url(${props.bgImage})`};
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+
+  /* Strong overlay for better text contrast */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(30, 58, 138, 0.8) 50%,
+      rgba(0, 0, 0, 0.7) 100%
+    );
+    z-index: 1;
+  }
+
+  /* All content should be above the overlay */
+  > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem;
+  }
 `;
 
-const EbookTitle = styled.h2`
+const EbookTitleOverlay = styled.h2`
   font-size: 1.8rem;
   font-weight: bold;
-  color: #1e3a8a;
+  color: white;
   margin-bottom: 1rem;
   line-height: 1.3;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 
   @media (max-width: 768px) {
     font-size: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
   }
 
   @media (max-width: 375px) {
@@ -125,58 +255,77 @@ const EbookTitle = styled.h2`
   }
 `;
 
-const EbookSubtitle = styled.p`
-  color: #666;
+const EbookSubtitleOverlay = styled.p`
+  color: rgba(255, 255, 255, 0.95);
   font-size: 1rem;
-  margin-bottom: 2rem;
   line-height: 1.5;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 375px) {
+    font-size: 0.85rem;
+  }
 `;
 
-const EbookIcon = styled(motion.div)`
-  width: 100px;
-  height: 100px;
-  background: linear-gradient(135deg, #1e40af, #3730a3);
+// Alternative Solution 3: Text on gradient background with image as accent
+const EbookCardGradient = styled(motion.div)`
+  position: absolute;
+  width: 100%;
+  height: 100%;
   border-radius: 20px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 10px 25px rgba(30, 64, 175, 0.3);
+  text-align: center;
+  padding: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+  position: relative;
+  overflow: hidden;
+
+  /* Background image as a subtle pattern */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: ${(props) => `url(${props.bgImage})`};
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15;
+    z-index: 1;
+  }
+
+  > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem;
+  }
 `;
 
 const CarouselNavigation = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
   margin-top: 2rem;
-`;
 
-const NavButton = styled(motion.button)`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  cursor: pointer;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: scale(1.1);
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+  @media (max-width: 480px) {
+    margin-top: 1.5rem;
   }
 `;
 
@@ -200,6 +349,11 @@ const Dot = styled(motion.button)`
     background: #f59e0b;
     transform: scale(1.2);
   }
+
+  @media (max-width: 480px) {
+    width: 10px;
+    height: 10px;
+  }
 `;
 
 const FormContainer = styled.div`
@@ -208,7 +362,7 @@ const FormContainer = styled.div`
 
   @media (max-width: 768px) {
     max-width: 100%;
-    padding: 0 1rem;
+    padding: 0 0.5rem;
   }
 `;
 
@@ -223,6 +377,11 @@ const FormTitle = styled(motion.h1)`
     font-size: 2.2rem;
   }
 
+  @media (max-width: 480px) {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
   @media (max-width: 375px) {
     font-size: 1.8rem;
   }
@@ -233,6 +392,16 @@ const FormSubtitle = styled(motion.p)`
   font-size: 1.2rem;
   margin-bottom: 2.5rem;
   line-height: 1.6;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const ProgressBar = styled(motion.div)`
@@ -250,43 +419,82 @@ const ProgressIndicator = styled(motion.div)`
   border-radius: 2px;
 `;
 
-// Enhanced ebook data for Sachhsoft
-const ebooks = [
+const LayoutToggleContainer = styled.div`
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 0.5rem;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 0.3rem;
+    width: 100%;
+  }
+`;
+
+const LayoutToggleButton = styled.button`
+  padding: 0.5rem 1rem;
+  background: ${(props) => (props.active ? "#f59e0b" : "#6b7280")};
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+
+  @media (max-width: 480px) {
+    width: 100%;
+    padding: 0.4rem 0.5rem;
+    font-size: 0.8rem;
+  }
+`;
+
+const services = [
   {
     id: 1,
-    title: "Complete Guide to Custom Software Development",
+    title: "Startup IT services/ Custom development/ Consulting",
     subtitle:
-      "Transform your business ideas into scalable digital solutions with proven methodologies",
-    icon: "💻",
-    value: "Save $50K+ on development costs",
-    gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      "Empower your startup with tailored IT solutions and expert consulting to transform ideas into scalable, high-impact products.",
+    bgImage: "/images/startup-IT-services-custom-development-consulting.webp",
+    value: "Expert Solutions for Startups",
   },
   {
     id: 2,
-    title: "Cloud Migration Strategy Handbook",
+    title: "Desktop and Mobile application",
     subtitle:
-      "Scale your business with secure cloud infrastructure and best practices",
-    icon: "☁️",
-    value: "Reduce operational costs by 40%",
-    gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+      "Create seamless, intuitive applications across desktop and mobile platforms that elevate user experiences and drive business growth.",
+    bgImage: "/images/desktop-mobile-application.webp",
+    value: "Cross-Platform Excellence",
   },
   {
     id: 3,
-    title: "Digital Marketing ROI Playbook",
+    title: "Cloud Computing",
     subtitle:
-      "Generate qualified leads and boost revenue growth with data-driven strategies",
-    icon: "📈",
-    value: "Increase revenue by 200%+",
-    gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+      "Leverage cloud computing to achieve agility, cost-efficiency, and secure scalability for your business operations.",
+    bgImage: "/images/cloud-computing.webp",
+    value: "Scalable Cloud Solutions",
   },
   {
     id: 4,
-    title: "Startup Tech Strategy Guide",
+    title: "White label product development",
     subtitle:
-      "Build your MVP and scale to enterprise level with expert guidance",
-    icon: "🚀",
-    value: "Launch 3x faster to market",
-    gradient: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
+      "Launch your own branded product effortlessly with our comprehensive white label development services.",
+    bgImage: "/images/white-label-product-development.webp",
+    value: "Your Brand, Our Expertise",
+  },
+  {
+    id: 5,
+    title: "E-commerce and Modern Web services",
+    subtitle:
+      "Build dynamic, high-conversion e-commerce platforms and modern websites optimized for performance and user engagement.",
+    bgImage: "/images/e-commerce-modern-web-services.webp",
+    value: "Convert Visitors to Customers",
+  },
+  {
+    id: 6,
+    title: "Digital Marketing",
+    subtitle:
+      "Boost your brand's visibility and engagement with innovative digital marketing strategies tailored for measurable success.",
+    bgImage: "/images/digital-marketing.webp",
+    value: "Drive Growth & Engagement",
   },
 ];
 
@@ -294,25 +502,24 @@ const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [layoutType, setLayoutType] = useState("split"); // "split", "overlay", "gradient"
 
   useEffect(() => {
     let timer;
     let progressTimer;
 
     if (isPlaying) {
-      // Progress animation
       progressTimer = setInterval(() => {
         setProgress((prev) => {
           if (prev >= 100) {
             return 0;
           }
-          return prev + 2.5; // 100 / 4000ms * 100ms = 2.5
+          return prev + 2.5;
         });
       }, 100);
 
-      // Slide change
       timer = setTimeout(() => {
-        setCurrentSlide((prev) => (prev + 1) % ebooks.length);
+        setCurrentSlide((prev) => (prev + 1) % services.length);
         setProgress(0);
       }, 4000);
     }
@@ -321,15 +528,15 @@ const HeroSection = () => {
       clearTimeout(timer);
       clearInterval(progressTimer);
     };
-  }, [currentSlide, isPlaying]);
+  }, [currentSlide, isPlaying, services.length]);
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % ebooks.length);
+    setCurrentSlide((prev) => (prev + 1) % services.length);
     setProgress(0);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + ebooks.length) % ebooks.length);
+    setCurrentSlide((prev) => (prev - 1 + services.length) % services.length);
     setProgress(0);
   };
 
@@ -342,83 +549,113 @@ const HeroSection = () => {
     setIsPlaying(!isPlaying);
   };
 
+  // Render different card types based on layoutType
+  const renderCard = () => {
+    const currentService = services[currentSlide];
+    const cardProps = {
+      key: currentSlide,
+      bgImage: currentService.bgImage,
+      initial: {
+        opacity: 0,
+        rotateY: 90,
+        scale: 0.8,
+        z: -100,
+      },
+      animate: {
+        opacity: 1,
+        rotateY: 0,
+        scale: 1,
+        z: 0,
+      },
+      exit: {
+        opacity: 0,
+        rotateY: -90,
+        scale: 0.8,
+        z: -100,
+      },
+      transition: {
+        duration: 0.8,
+        ease: "easeInOut",
+        opacity: { duration: 0.6 },
+        scale: { duration: 0.8 },
+      },
+      whileHover: {
+        scale: 1.05,
+        rotateY: 5,
+        transition: { duration: 0.3 },
+      },
+      onClick: () => setIsPlaying(!isPlaying),
+    };
+
+    switch (layoutType) {
+      case "split":
+        return (
+          <EbookCard {...cardProps}>
+            <ImageSection bgImage={currentService.bgImage} />
+            <TextSection>
+              <EbookTitle>{currentService.title}</EbookTitle>
+              <EbookSubtitle>{currentService.subtitle}</EbookSubtitle>
+            </TextSection>
+          </EbookCard>
+        );
+
+      case "overlay":
+        return (
+          <EbookCardOverlay {...cardProps}>
+            <EbookTitleOverlay>{currentService.title}</EbookTitleOverlay>
+            <EbookSubtitleOverlay>
+              {currentService.subtitle}
+            </EbookSubtitleOverlay>
+          </EbookCardOverlay>
+        );
+
+      case "gradient":
+        return (
+          <EbookCardGradient {...cardProps}>
+            <EbookTitleOverlay>{currentService.title}</EbookTitleOverlay>
+            <EbookSubtitleOverlay>
+              {currentService.subtitle}
+            </EbookSubtitleOverlay>
+          </EbookCardGradient>
+        );
+
+      default:
+        return null;
+    }
+  };
+
   return (
     <HeroContainer>
       <LeftSection>
+        {/* Layout Toggle Buttons for Testing */}
+        <LayoutToggleContainer>
+          <LayoutToggleButton
+            onClick={() => setLayoutType("split")}
+            active={layoutType === "split"}
+          >
+            Split Layout
+          </LayoutToggleButton>
+          <LayoutToggleButton
+            onClick={() => setLayoutType("overlay")}
+            active={layoutType === "overlay"}
+          >
+            Strong Overlay
+          </LayoutToggleButton>
+          <LayoutToggleButton
+            onClick={() => setLayoutType("gradient")}
+            active={layoutType === "gradient"}
+          >
+            Gradient BG
+          </LayoutToggleButton>
+        </LayoutToggleContainer>
+
         <CarouselContainer>
-          <AnimatePresence mode="wait">
-            <EbookCard
-              key={currentSlide}
-              initial={{
-                opacity: 0,
-                rotateY: 90,
-                scale: 0.8,
-                z: -100,
-              }}
-              animate={{
-                opacity: 1,
-                rotateY: 0,
-                scale: 1,
-                z: 0,
-              }}
-              exit={{
-                opacity: 0,
-                rotateY: -90,
-                scale: 0.8,
-                z: -100,
-              }}
-              transition={{
-                duration: 0.8,
-                ease: "easeInOut",
-                opacity: { duration: 0.6 },
-                scale: { duration: 0.8 },
-              }}
-              whileHover={{
-                scale: 1.05,
-                rotateY: 5,
-                transition: { duration: 0.3 },
-              }}
-              onClick={() => setIsPlaying(!isPlaying)}
-            >
-              <EbookIcon
-                animate={{
-                  rotate: [0, 5, -5, 0],
-                  scale: [1, 1.1, 1],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                {ebooks[currentSlide].icon}
-              </EbookIcon>
-
-              <ValueProposition
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-              >
-                {ebooks[currentSlide].value}
-              </ValueProposition>
-
-              <EbookTitle>{ebooks[currentSlide].title}</EbookTitle>
-              <EbookSubtitle>{ebooks[currentSlide].subtitle}</EbookSubtitle>
-            </EbookCard>
-          </AnimatePresence>
+          <AnimatePresence mode="wait">{renderCard()}</AnimatePresence>
         </CarouselContainer>
 
         <CarouselNavigation>
-          <NavButton
-            onClick={prevSlide}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            ‹
-          </NavButton>
-
           <SliderDots>
-            {ebooks.map((_, index) => (
+            {services.map((_, index) => (
               <Dot
                 key={index}
                 active={index === currentSlide}
@@ -428,14 +665,6 @@ const HeroSection = () => {
               />
             ))}
           </SliderDots>
-
-          <NavButton
-            onClick={nextSlide}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            ›
-          </NavButton>
         </CarouselNavigation>
 
         <ProgressBar>
