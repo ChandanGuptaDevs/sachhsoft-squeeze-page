@@ -125,19 +125,32 @@ const FooterContainer = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 0.5rem;
     text-align: center;
   }
 `;
 
 const FooterLeft = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 2rem;
+  flex: 0 0 auto;
 
   @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 1rem;
+    order: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+`;
+
+const CopyrightContainer = styled.div`
+  display: flex;
+
+  justify-content: center;
+  flex: 1;
+
+  @media (max-width: 768px) {
+    order: 2;
+    margin: 1rem 0;
+    width: 100%;
   }
 `;
 
@@ -154,6 +167,7 @@ const FooterLinks = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
+    width: 100%;
   }
 `;
 
@@ -171,6 +185,12 @@ const FooterLink = styled.a`
 const SocialIcons = styled.div`
   display: flex;
   gap: 1rem;
+
+  @media (max-width: 768px) {
+    order: 3;
+    justify-content: center;
+    width: 100%;
+  }
 `;
 
 const SocialIcon = styled(motion.a)`
@@ -280,14 +300,14 @@ const CTAAndFooter = () => {
       <Footer>
         <FooterContainer>
           <FooterLeft>
-            <Copyright>Copyright © 2025 Sachhsoft</Copyright>
             <FooterLinks>
               <FooterLink href="#">Privacy Policy</FooterLink>
-              <FooterLink href="#">Sitemap</FooterLink>
-              <FooterLink href="#">Terms & Conditions</FooterLink>
-              <FooterLink href="#">Refund & Cancellation Policy</FooterLink>
             </FooterLinks>
           </FooterLeft>
+
+          <CopyrightContainer>
+            <Copyright>Copyright © 2025 Sachhsoft</Copyright>
+          </CopyrightContainer>
 
           <SocialIcons>
             <SocialIcon
