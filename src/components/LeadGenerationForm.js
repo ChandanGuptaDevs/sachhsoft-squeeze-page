@@ -4,6 +4,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 const FormSection = styled.section`
   display: flex;
@@ -511,6 +512,7 @@ const SuccessMessage = styled(motion.div)`
 const LeadGenerationForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const {
     register,
@@ -530,6 +532,10 @@ const LeadGenerationForm = () => {
     reset();
 
     setTimeout(() => setIsSubmitted(false), 5000);
+  };
+
+  const handlePrivacyClick = () => {
+    router.push("/privacy-policy");
   };
 
   const benefits = [
@@ -755,7 +761,7 @@ const LeadGenerationForm = () => {
                 <CheckboxLabel htmlFor="consent">
                   I agree to receive communications from Sachhsoft and
                   understand that I can unsubscribe at any time. View our{" "}
-                  <a href="/privacy-policy" target="_blank">
+                  <a onClick={handlePrivacyClick} style={{ cursor: "pointer" }}>
                     Privacy Policy
                   </a>{" "}
                   for more details.

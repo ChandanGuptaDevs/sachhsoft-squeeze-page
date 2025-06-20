@@ -9,6 +9,7 @@ import {
   IconBrandLinkedin,
   IconBrandX,
 } from "@tabler/icons-react";
+import { useRouter } from "next/navigation";
 
 const CTASection = styled.section`
   background: linear-gradient(135deg, #30cff2 0%, #00bcd4 100%);
@@ -143,7 +144,6 @@ const FooterLeft = styled.div`
 
 const CopyrightContainer = styled.div`
   display: flex;
-
   justify-content: center;
   flex: 1;
 
@@ -176,6 +176,7 @@ const FooterLink = styled.a`
   text-decoration: none;
   font-size: 0.9rem;
   transition: color 0.3s ease;
+  cursor: pointer;
 
   &:hover {
     color: white;
@@ -241,8 +242,14 @@ const SocialIconWrapper = styled.div`
 `;
 
 const CTAAndFooter = () => {
+  const router = useRouter();
+
   const handleCTAClick = () => {
     window.open("https://calendly.com/sachhsoft", "_blank");
+  };
+
+  const handlePrivacyClick = () => {
+    router.push("/privacy-policy");
   };
 
   return (
@@ -300,7 +307,9 @@ const CTAAndFooter = () => {
         <FooterContainer>
           <FooterLeft>
             <FooterLinks>
-              <FooterLink href="#">Privacy Policy</FooterLink>
+              <FooterLink onClick={handlePrivacyClick}>
+                Privacy Policy
+              </FooterLink>
             </FooterLinks>
           </FooterLeft>
 
