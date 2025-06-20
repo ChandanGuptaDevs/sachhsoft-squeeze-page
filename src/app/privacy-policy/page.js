@@ -363,7 +363,8 @@ export default function PrivacyPolicy() {
             <SectionTitle>8. Changes to This Policy</SectionTitle>
             <Paragraph>
               We may update this Privacy Policy from time to time. All changes
-              will be posted on this page with an updated "Effective Date."
+              will be posted on this page with an updated &quot;Effective
+              Date.&quot;
             </Paragraph>
           </Section>
 
