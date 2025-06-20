@@ -36,7 +36,7 @@ const LogoContainer = styled.div`
   display: flex;
   align-items: center;
 
-  height: 45px; /* Slightly reduced for better proportions */
+  height: 45px;
   transition: all 0.3s ease;
 
   &:hover {

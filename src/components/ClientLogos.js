@@ -288,7 +288,6 @@ const ClientLogos = () => {
     setIsVisible(true);
   }, []);
 
-  // Actual Sachhsoft Clients with their logo paths
   const actualClients = [
     {
       name: "Phonecheck",
@@ -317,7 +316,6 @@ const ClientLogos = () => {
     },
   ];
 
-  // Technology Partners (keeping these as they're industry standard)
   const techPartners = [
     { name: "Microsoft", color: "#5e5e5e" },
     { name: "AWS", color: "#ff9900" },
@@ -326,7 +324,6 @@ const ClientLogos = () => {
     { name: "Oracle", color: "#c74634" },
   ];
 
-  // Industry Certifications
   const certifications = [
     { name: "ISO 27001", color: "#0066cc" },
     { name: "CMMI Level 5", color: "#8b0000" },
@@ -395,7 +392,6 @@ const ClientLogos = () => {
           </SectionSubtitle>
 
           <LogosContainer>
-            {/* Actual Clients */}
             <motion.div variants={itemVariants}>
               <CategoryTitle
                 initial={{ opacity: 0, x: -20 }}
@@ -443,7 +439,6 @@ const ClientLogos = () => {
               </LogoRow>
             </motion.div>
 
-            {/* Technology Partners */}
             <motion.div variants={itemVariants}>
               <CategoryTitle
                 initial={{ opacity: 0, x: -20 }}
@@ -478,7 +473,6 @@ const ClientLogos = () => {
               </LogoRow>
             </motion.div>
 
-            {/* Certifications */}
             <motion.div variants={itemVariants}>
               <CategoryTitle
                 initial={{ opacity: 0, x: -20 }}
@@ -514,7 +508,6 @@ const ClientLogos = () => {
             </motion.div>
           </LogosContainer>
 
-          {/* Stats Section */}
           <StatsContainer
             variants={itemVariants}
             initial={{ opacity: 0, y: 50 }}

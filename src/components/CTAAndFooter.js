@@ -242,7 +242,6 @@ const SocialIconWrapper = styled.div`
 
 const CTAAndFooter = () => {
   const handleCTAClick = () => {
-    // Replace with your actual Calendly link
     window.open("https://calendly.com/sachhsoft", "_blank");
   };
 

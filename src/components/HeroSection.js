@@ -91,7 +91,6 @@ const CarouselContainer = styled.div`
   }
 `;
 
-// SOLUTION 1: Split Layout - Image on top, text below with solid background
 const EbookCard = styled(motion.div)`
   position: absolute;
   width: 100%;
@@ -107,13 +106,12 @@ const EbookCard = styled(motion.div)`
 `;
 
 const ImageSection = styled.div`
-  flex: 0 0 60%; /* Takes up 60% of the card height */
+  flex: 0 0 60%;
   background-image: ${(props) => `url(${props.bgImage})`};
   background-size: cover;
   background-position: center;
   position: relative;
 
-  /* Optional: Add a subtle overlay to the image section */
   &::after {
     content: "";
     position: absolute;
@@ -180,7 +178,6 @@ const EbookSubtitle = styled.p`
   }
 `;
 
-// Alternative Solution 2: Keep overlay but make it stronger
 const EbookCardOverlay = styled(motion.div)`
   position: absolute;
   width: 100%;
@@ -201,7 +198,6 @@ const EbookCardOverlay = styled(motion.div)`
   position: relative;
   overflow: hidden;
 
-  /* Strong overlay for better text contrast */
   &::before {
     content: "";
     position: absolute;
@@ -218,7 +214,6 @@ const EbookCardOverlay = styled(motion.div)`
     z-index: 1;
   }
 
-  /* All content should be above the overlay */
   > * {
     position: relative;
     z-index: 2;
@@ -270,7 +265,6 @@ const EbookSubtitleOverlay = styled.p`
   }
 `;
 
-// Alternative Solution 3: Text on gradient background with image as accent
 const EbookCardGradient = styled(motion.div)`
   position: absolute;
   width: 100%;
@@ -289,7 +283,6 @@ const EbookCardGradient = styled(motion.div)`
   position: relative;
   overflow: hidden;
 
-  /* Background image as a subtle pattern */
   &::before {
     content: "";
     position: absolute;
@@ -506,7 +499,7 @@ const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
-  const [layoutType, setLayoutType] = useState("split"); // "split", "overlay", "gradient"
+  const [layoutType, setLayoutType] = useState("split");
 
   useEffect(() => {
     let timer;
@@ -553,7 +546,6 @@ const HeroSection = () => {
     setIsPlaying(!isPlaying);
   };
 
-  // Render different card types based on layoutType
   const renderCard = () => {
     const currentService = services[currentSlide];
     const cardProps = {
@@ -631,7 +623,6 @@ const HeroSection = () => {
   return (
     <HeroContainer>
       <LeftSection>
-        {/* Layout Toggle Buttons for Testing */}
         <LayoutToggleContainer>
           <LayoutToggleButton
             onClick={() => setLayoutType("split")}
@@ -686,7 +677,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Transform Your Ideas into Scalable Digital Solutions
+            Your Next Big Idea Starts Here
           </FormTitle>
 
           <FormSubtitle
@@ -694,48 +685,11 @@ const HeroSection = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            We help startups and businesses build lightning-fast, secure, and
-            scalable web & mobile apps using cutting-edge technologies.
+            Let&apos;s turn your idea into a scalable success with tailored
+            development solutions built for growth. Whether you&apos;re
+            launching a startup or scaling your platform, Sachhsoft brings the
+            strategy, speed, and skill to make it happen.
           </FormSubtitle>
-
-          {/* 
-          <motion.div
-            style={{
-              padding: "2rem",
-              background: "#f8f9fa",
-              borderRadius: "10px",
-            }}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-          */}
-          {/* Commenting out the form container but keeping just the button */}
-          {/* <form style={{ textAlign: "left" }}>
-              <div style={{ marginBottom: "1.5rem" }}>
-                <label
-                  style={{
-                    display: "block",
-                    marginBottom: "0.5rem",
-                    fontWeight: "500",
-                    color: "#374151",
-                  }}
-                >
-                  Email Address*
-                </label>
-                <input
-                  type="email"
-                  placeholder="Enter your email to get started"
-                  style={{
-                    width: "100%",
-                    padding: "0.875rem",
-                    borderRadius: "6px",
-                    border: "2px solid #e5e7eb",
-                    fontSize: "1rem",
-                  }}
-                  required
-                />
-              </div> */}
 
           <motion.button
             type="submit"
@@ -757,7 +711,7 @@ const HeroSection = () => {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            🚀 Get a Free Consultation
+            Talk to Our Experts
             <ArrowIcon
               animate={{ x: [0, 5, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
@@ -765,20 +719,6 @@ const HeroSection = () => {
               →
             </ArrowIcon>
           </motion.button>
-
-          {/* <p
-                style={{
-                  fontSize: "0.875rem",
-                  color: "#6b7280",
-                  marginTop: "1rem",
-                  textAlign: "center",
-                }}
-              >
-                Instant access to all our strategic guides. No credit card
-                required.
-              </p>
-            </form> */}
-          {/* </motion.div> */}
         </FormContainer>
       </RightSection>
     </HeroContainer>
