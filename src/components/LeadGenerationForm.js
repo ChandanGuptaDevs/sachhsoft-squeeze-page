@@ -554,7 +554,7 @@ const LeadGenerationForm = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          Get Your Free Project Consultation
+          Get Your Project Consultation
         </MainHeadline>
 
         <SubHeadline
@@ -611,9 +611,7 @@ const LeadGenerationForm = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <FormTitle>
-            Get Your Free Project Planning Kit + Consultation
-          </FormTitle>
+          <FormTitle>Get Your Project Planning Kit + Consultation</FormTitle>
           <FormSubtitle>
             Fill out the form below to download your free resources and schedule
             your personalized consultation
@@ -784,7 +782,7 @@ const LeadGenerationForm = () => {
                   "Sending Your Free Resources..."
                 ) : (
                   <>
-                    Download Free Kit + Get Consultation
+                    Download Kit + Get Consultation
                     <ArrowIcon
                       animate={{ x: [0, 5, 0] }}
                       transition={{ duration: 1.5, repeat: Infinity }}
