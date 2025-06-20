@@ -318,6 +318,7 @@ const CTAAndFooter = () => {
           </CopyrightContainer>
 
           <SocialIcons>
+            {/* Commenting out Facebook icon
             <SocialIcon
               href="#"
               target="_blank"
@@ -330,7 +331,9 @@ const CTAAndFooter = () => {
                 <IconBrandFacebook size={20} stroke={2} />
               </SocialIconWrapper>
             </SocialIcon>
+            */}
 
+            {/* Commenting out Instagram icon
             <SocialIcon
               href="#"
               target="_blank"
@@ -343,9 +346,10 @@ const CTAAndFooter = () => {
                 <IconBrandInstagram size={20} stroke={2} />
               </SocialIconWrapper>
             </SocialIcon>
+            */}
 
             <SocialIcon
-              href="#"
+              href="https://www.linkedin.com/company/92896939/"
               target="_blank"
               rel="noopener noreferrer"
               className="linkedin"
@@ -357,6 +361,7 @@ const CTAAndFooter = () => {
               </SocialIconWrapper>
             </SocialIcon>
 
+            {/* Commenting out Twitter/X icon
             <SocialIcon
               href="#"
               target="_blank"
@@ -369,6 +374,7 @@ const CTAAndFooter = () => {
                 <IconBrandX size={20} stroke={2} />
               </SocialIconWrapper>
             </SocialIcon>
+            */}
           </SocialIcons>
         </FooterContainer>
       </Footer>
