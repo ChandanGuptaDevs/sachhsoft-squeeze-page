@@ -499,7 +499,7 @@ const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
-  const [layoutType, setLayoutType] = useState("split");
+  // Removed the layoutType state since we'll only use Split Layout
 
   useEffect(() => {
     let timer;
@@ -546,6 +546,7 @@ const HeroSection = () => {
     setIsPlaying(!isPlaying);
   };
 
+  // Simplified renderCard function to only use Split Layout
   const renderCard = () => {
     const currentService = services[currentSlide];
     const cardProps = {
@@ -583,66 +584,22 @@ const HeroSection = () => {
       onClick: () => setIsPlaying(!isPlaying),
     };
 
-    switch (layoutType) {
-      case "split":
-        return (
-          <EbookCard {...cardProps}>
-            <ImageSection bgImage={currentService.bgImage} />
-            <TextSection>
-              <EbookTitle>{currentService.title}</EbookTitle>
-              <EbookSubtitle>{currentService.subtitle}</EbookSubtitle>
-            </TextSection>
-          </EbookCard>
-        );
-
-      case "overlay":
-        return (
-          <EbookCardOverlay {...cardProps}>
-            <EbookTitleOverlay>{currentService.title}</EbookTitleOverlay>
-            <EbookSubtitleOverlay>
-              {currentService.subtitle}
-            </EbookSubtitleOverlay>
-          </EbookCardOverlay>
-        );
-
-      case "gradient":
-        return (
-          <EbookCardGradient {...cardProps}>
-            <EbookTitleOverlay>{currentService.title}</EbookTitleOverlay>
-            <EbookSubtitleOverlay>
-              {currentService.subtitle}
-            </EbookSubtitleOverlay>
-          </EbookCardGradient>
-        );
-
-      default:
-        return null;
-    }
+    // Only return the Split Layout version
+    return (
+      <EbookCard {...cardProps}>
+        <ImageSection bgImage={currentService.bgImage} />
+        <TextSection>
+          <EbookTitle>{currentService.title}</EbookTitle>
+          <EbookSubtitle>{currentService.subtitle}</EbookSubtitle>
+        </TextSection>
+      </EbookCard>
+    );
   };
 
   return (
     <HeroContainer>
       <LeftSection>
-        <LayoutToggleContainer>
-          <LayoutToggleButton
-            onClick={() => setLayoutType("split")}
-            active={layoutType === "split"}
-          >
-            Split Layout
-          </LayoutToggleButton>
-          <LayoutToggleButton
-            onClick={() => setLayoutType("overlay")}
-            active={layoutType === "overlay"}
-          >
-            Strong Overlay
-          </LayoutToggleButton>
-          <LayoutToggleButton
-            onClick={() => setLayoutType("gradient")}
-            active={layoutType === "gradient"}
-          >
-            Gradient BG
-          </LayoutToggleButton>
-        </LayoutToggleContainer>
+        {/* Removed the LayoutToggleContainer and buttons */}
 
         <CarouselContainer>
           <AnimatePresence mode="wait">{renderCard()}</AnimatePresence>
