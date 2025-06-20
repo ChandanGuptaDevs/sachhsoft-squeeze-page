@@ -1194,7 +1194,7 @@ const LeadGenerationForm = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <BenefitTitle>What you'll get:</BenefitTitle>
+          <BenefitTitle>What you&apos;ll get:</BenefitTitle>
 
           {benefits.slice(0, 4).map((benefit, index) => (
             <BenefitItem
