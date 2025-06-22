@@ -178,139 +178,6 @@ const EbookSubtitle = styled.p`
   }
 `;
 
-const EbookCardOverlay = styled(motion.div)`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 20px;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 2.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  cursor: pointer;
-  background-image: ${(props) => `url(${props.bgImage})`};
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.7) 0%,
-      rgba(30, 58, 138, 0.8) 50%,
-      rgba(0, 0, 0, 0.7) 100%
-    );
-    z-index: 1;
-  }
-
-  > * {
-    position: relative;
-    z-index: 2;
-  }
-
-  @media (max-width: 768px) {
-    padding: 2rem;
-  }
-
-  @media (max-width: 480px) {
-    padding: 1.5rem;
-  }
-`;
-
-const EbookTitleOverlay = styled.h2`
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: white;
-  margin-bottom: 1rem;
-  line-height: 1.3;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-
-  @media (max-width: 768px) {
-    font-size: 1.5rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1.4rem;
-    margin-bottom: 0.75rem;
-  }
-
-  @media (max-width: 375px) {
-    font-size: 1.3rem;
-  }
-`;
-
-const EbookSubtitleOverlay = styled.p`
-  color: rgba(255, 255, 255, 0.95);
-  font-size: 1rem;
-  line-height: 1.5;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-
-  @media (max-width: 480px) {
-    font-size: 0.9rem;
-  }
-
-  @media (max-width: 375px) {
-    font-size: 0.85rem;
-  }
-`;
-
-const EbookCardGradient = styled(motion.div)`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 20px;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 2.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  cursor: pointer;
-  background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: ${(props) => `url(${props.bgImage})`};
-    background-size: cover;
-    background-position: center;
-    opacity: 0.15;
-    z-index: 1;
-  }
-
-  > * {
-    position: relative;
-    z-index: 2;
-  }
-
-  @media (max-width: 768px) {
-    padding: 2rem;
-  }
-
-  @media (max-width: 480px) {
-    padding: 1.5rem;
-  }
-`;
-
 const CarouselNavigation = styled.div`
   display: flex;
   justify-content: center;
@@ -416,34 +283,6 @@ const ArrowIcon = styled(motion.span)`
   font-size: 1.2rem;
 `;
 
-const LayoutToggleContainer = styled.div`
-  margin-bottom: 1rem;
-  display: flex;
-  gap: 0.5rem;
-
-  @media (max-width: 480px) {
-    flex-direction: column;
-    gap: 0.3rem;
-    width: 100%;
-  }
-`;
-
-const LayoutToggleButton = styled.button`
-  padding: 0.5rem 1rem;
-  background: ${(props) => (props.active ? "#f59e0b" : "#6b7280")};
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9rem;
-
-  @media (max-width: 480px) {
-    width: 100%;
-    padding: 0.4rem 0.5rem;
-    font-size: 0.8rem;
-  }
-`;
-
 const services = [
   {
     id: 1,
@@ -499,7 +338,6 @@ const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
-  // Removed the layoutType state since we'll only use Split Layout
 
   useEffect(() => {
     let timer;
@@ -546,7 +384,10 @@ const HeroSection = () => {
     setIsPlaying(!isPlaying);
   };
 
-  // Simplified renderCard function to only use Split Layout
+  const handleCalendlyClick = () => {
+    window.open("https://calendly.com/sachhsoft", "_blank");
+  };
+
   const renderCard = () => {
     const currentService = services[currentSlide];
     const cardProps = {
@@ -584,7 +425,6 @@ const HeroSection = () => {
       onClick: () => setIsPlaying(!isPlaying),
     };
 
-    // Only return the Split Layout version
     return (
       <EbookCard {...cardProps}>
         <ImageSection bgImage={currentService.bgImage} />
@@ -599,8 +439,6 @@ const HeroSection = () => {
   return (
     <HeroContainer>
       <LeftSection>
-        {/* Removed the LayoutToggleContainer and buttons */}
-
         <CarouselContainer>
           <AnimatePresence mode="wait">{renderCard()}</AnimatePresence>
         </CarouselContainer>
@@ -649,7 +487,8 @@ const HeroSection = () => {
           </FormSubtitle>
 
           <motion.button
-            type="submit"
+            type="button"
+            onClick={handleCalendlyClick}
             style={{
               width: "100%",
               padding: "1rem",
