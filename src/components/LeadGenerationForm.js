@@ -436,10 +436,18 @@ const ErrorText = styled.span`
   font-size: 0.875rem;
   margin-top: 0.25rem;
   display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const CheckboxField = styled(motion.div)`
   margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+`;
+
+const CheckboxWrapper = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
@@ -512,6 +520,7 @@ const SuccessMessage = styled(motion.div)`
 const LeadGenerationForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const router = useRouter();
 
   const {
@@ -523,15 +532,50 @@ const LeadGenerationForm = () => {
 
   const onSubmit = async (data) => {
     setIsLoading(true);
+    setSubmitError("");
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      // Submit to Formspree using environment variable
+      const response = await fetch(process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          designation: data.designation,
+          company: data.company,
+          consent: data.consent,
+          source: "Lead Generation Form",
+          timestamp: new Date().toISOString(),
+        }),
+      });
 
-    console.log("Form Data:", data);
-    setIsSubmitted(true);
-    setIsLoading(false);
-    reset();
+      if (response.ok) {
+        setIsSubmitted(true);
+        reset();
 
-    setTimeout(() => setIsSubmitted(false), 5000);
+        // Optional: Send welcome email or redirect
+        setTimeout(() => {
+          // You can redirect to a thank you page or keep on same page
+          console.log("Form submitted successfully");
+        }, 2000);
+      } else {
+        throw new Error("Form submission failed");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setSubmitError("Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
+
+      // Auto-hide success message after 5 seconds
+      if (isSubmitted) {
+        setTimeout(() => setIsSubmitted(false), 5000);
+      }
+    }
   };
 
   const handlePrivacyClick = () => {
@@ -617,14 +661,32 @@ const LeadGenerationForm = () => {
             your personalized consultation
           </FormSubtitle>
 
+          {submitError && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              style={{
+                background: "#ef4444",
+                color: "white",
+                padding: "1rem",
+                borderRadius: "6px",
+                marginBottom: "1rem",
+                textAlign: "center",
+              }}
+            >
+              {submitError}
+            </motion.div>
+          )}
+
           {isSubmitted ? (
             <SuccessMessage
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
             >
-              🎉 Success! Check your email for the download link. Our team will
-              contact you within 24 hours to schedule your consultation.
+              🎉 Success! Thank you for your submission. Our team will contact
+              you within 24 hours to schedule your consultation and provide your
+              free resources.
             </SuccessMessage>
           ) : (
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -749,21 +811,26 @@ const LeadGenerationForm = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.0 }}
               >
-                <CheckboxInput
-                  id="consent"
-                  type="checkbox"
-                  {...register("consent", {
-                    required: "Please agree to our terms to continue",
-                  })}
-                />
-                <CheckboxLabel htmlFor="consent">
-                  I agree to receive communications from Sachhsoft and
-                  understand that I can unsubscribe at any time. View our{" "}
-                  <a onClick={handlePrivacyClick} style={{ cursor: "pointer" }}>
-                    Privacy Policy
-                  </a>{" "}
-                  for more details.
-                </CheckboxLabel>
+                <CheckboxWrapper>
+                  <CheckboxInput
+                    id="consent"
+                    type="checkbox"
+                    {...register("consent", {
+                      required: "Please agree to our terms to continue",
+                    })}
+                  />
+                  <CheckboxLabel htmlFor="consent">
+                    I agree to receive communications from Sachhsoft and
+                    understand that I can unsubscribe at any time. View our{" "}
+                    <a
+                      onClick={handlePrivacyClick}
+                      style={{ cursor: "pointer" }}
+                    >
+                      Privacy Policy
+                    </a>{" "}
+                    for more details.
+                  </CheckboxLabel>
+                </CheckboxWrapper>
                 {errors.consent && (
                   <ErrorText>{errors.consent.message}</ErrorText>
                 )}
@@ -772,14 +839,14 @@ const LeadGenerationForm = () => {
               <SubmitButton
                 type="submit"
                 disabled={isLoading}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={isLoading ? {} : { scale: 1.02 }}
+                whileTap={isLoading ? {} : { scale: 0.98 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.1 }}
               >
                 {isLoading ? (
-                  "Sending Your Free Resources..."
+                  "Submitting..."
                 ) : (
                   <>
                     Download Kit + Get Consultation
